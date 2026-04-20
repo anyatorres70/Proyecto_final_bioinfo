@@ -1,4 +1,4 @@
-# Proyecto_final_bioinfo
+# Proyecto final
 
  *Anya Miranda Reyes Torres*
 
