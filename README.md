@@ -1,2 +1,8 @@
 # Proyecto_final_bioinfo
-Proyecto final de la clase de Introducción a la programación para bioinformática con Bash
+
+ *Anya Miranda Reyes Torres*
+
+
+  **Descripción de repositorio**
+- Se utilizará para guardar el proyecto final de la clase de Introducción a la programación para bioinformática con Bash
+
