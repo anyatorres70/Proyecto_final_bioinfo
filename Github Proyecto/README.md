@@ -1,7 +1,6 @@
 # README
 # Análisis del codón CTG en las secuencias del genoma de la levadura marina *Debaryomyces hansenii* (RefSeq)
 
-*Anya*
 
 ## Introducción
 
