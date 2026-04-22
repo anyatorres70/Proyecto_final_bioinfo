@@ -1,6 +1,8 @@
 # README
 # Análisis del codón CTG en las secuencias del genoma de la levadura marina *Debaryomyces hansenii* (RefSeq)
 
+*Anya*
+
 ## Introducción
 
 La levadura marina *D. hansenii* es un organismo eurohalino, xero- y osmotolerante que ha estado teniendo un mayor foco e importancia dentro de los estudios de diferentes áreas científicas, incluidas la medicina, biotecnología, ciencias del mar e incluso evolución. Esto debido a su caracteristico uso del codón CTG, el cuál, a diferencia de casi todos los demás organismos, suele codificar para el aminoácido polar Serina en luga del aminoácido hidrofóbico Leucina. 
