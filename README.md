@@ -1,8 +1,6 @@
 # README
 # Análisis del codón CTG en las secuencias del genoma de la levadura marina *Debaryomyces hansenii* (RefSeq)
 
-*Anya*
-
 ## Introducción
 
 La levadura marina *D. hansenii* es un organismo eurohalino, xero- y osmotolerante que ha estado teniendo un mayor foco e importancia dentro de los estudios de diferentes áreas científicas, incluidas la medicina, biotecnología, ciencias del mar e incluso evolución. Esto debido a su caracteristico uso del codón CTG, el cuál, a diferencia de casi todos los demás organismos, suele codificar para el aminoácido polar Serina en luga del aminoácido hidrofóbico Leucina. 
@@ -18,36 +16,69 @@ En particular, se centra en la identificación y cuantificación del codón CTG 
 
 ## Objetivos
 
-Explicar para qué sirve el script/flujo de trabajo
+Hacer un script en bash que permita analizar el uso del codón CTG en el genoma de *Debaryomyces hansenii*. Se automatizará la descarga del genoma (RefSeq) para después procesar las secuencias génicas dividiéndolas en tripletes (codones), se identificará y contabilizará la frecuencia del codón CTG en cada gen, y se generará una salida que muestre, para cada gen, su secuencia, número de codones CTG y localización, para poder ordenar los genes en función de la cantidad de codones CTG (de mayor a menor frecuencia) y así poder seleccionar un grupo de genes con la mayor cantidad de codones CTG y estudiar si hay cambios en la expresión de estos en diferentes condiciones de estrés. 
 
 ## Descripción del flujo de trabajo
 
-Resumen de los pasos principales del análisis 
+Se va a automatizar el análisis del codón CTG en el genoma de *D. hansenii* a partir de datos RefSeq. El flujo de trabajo sigue los siguientes pasos principales:
+
+- Descarga del genoma: Se obtiene el archivo del genoma de *D. hansenii* desde la base de datos RefSeq.
+- Extracción de genes: Se e procesan los archivos descargados para extraer las secuencias individuales de cada gen, conservando sus identificadores.
+- Procesamiento de secuencias: Cada secuencia se divide en tripletes (codones) respetando el marco de lectura.
+- Identificación de codones CTG: Se buscan todos los codones CTG dentro de cada secuencia.
+- Conteo y localización: Se cuenta el número de codones CTG por gen y se registran sus posiciones dentro de la secuencia.
+- Organización de resultados: Los genes se ordenan de acuerdo con la cantidad de codones CTG (de mayor a menor).
+- Generación de salidas: Se generan archivos de salida con la información procesada para su análisis posterior.
 
 ## Estructura del repositorio
 
-Explicación breve de carpetas y archivos principales 
+Proyecto_final_bioinfo/
+│
+├── README.md
+├── datos/
+│   ├── descargados/      # Datos descargados desde RefSeq
+│   └── procesados/       # Secuencias procesadas y separadas por gen
+│
+├── resultados/           # Resultados finales (conteos, posiciones, lista)
+│
+├── scripts/
+    ├── principal.sh      # Script principal del flujo de trabajo
+    ├── download.sh       # Descarga de datos desde RefSeq
+    ├── extraccion.sh     # Extracción de secuencias génicas
+    ├── codon_analisis.sh # Identificación y conteo de CTG
+
+
 
 ## Requisitos de Software 
 
-Lista de programas usados con versiones y los comandos que usamos
+- Bash 3.2.57(1)
+- curl o wget (para descarga de datos)
+- grep 2.6.0 (para buscar patrones) 
+- awk 20200816
+- sed
 
 ## Reproducibilidad 
 
-Indicar como preparar el ambiente para correr el análisis: si hay instalación manual, uso de micromamba, apptainer, etc. 
+Puede ejecutarse directamente en cualquier sistema Linux (o macOS) que cuente con las herramientas necesarias ya instaladas, no requiere la creación de entornos virtuales o contenedores.
 
 ## Instrucciones de uso
 
-Explicar paso a paso como ejecutar el programa
-Ejemplo:
+#Clonar el repositorio
+git clone https://github.com/anyatorres70/Proyecto_final_bioinfo.git
 
-git clone https://github.com/usuario/proyecto_final.git
-cd proyecto_final
-bash scripts/pipeline.sh
+#Entrar al directorio del proyecto
+Proyecto_final_bioinfo
+
+#Dar permisos de ejecución (si es necesario)
+chmod +x scripts/principal.sh
+
+#Ejecutar el pipeline
+bash scripts/principal.sh
 
 ## Entradas y salidas
 
-Describir qué archivos recibe el análisis y qué archivos genera.
+- Entradas: Archivo del genoma de *D. hansenii* descargado desde RefSeq (FASTA).
+- Salidas: Archivos con secuencias separadas por gen, secuencias divididas en tripletes, conteo del número de codones CTG por gen, posiciones de los codones CTG dentro de cada secuencia, lista de genes ordenados por cantidad de codones CTG (de mayor a menor), reportes finales en formato de texto para análisis posterior.
 
 ## Información del sistema
 
