@@ -6,10 +6,12 @@
 source ../.env
 #cargamos ID y TOKEN
 
-mensaje="Hola desde mi script"
+send_telegram() {
+  local mensaje="$1"
 
 curl -s -X POST "https://api.telegram.org/bot${TOKEN}/sendMessage" \
   -d "chat_id=${CHAT_ID}" \
-  -d "text=$mensaje"
+  -d "text=$mensaje" > /dev/null
+}
   #parametros emiezan con $ seguido del número de parametro que buscamos
-  #$1 es el texto del mensaje
+  
