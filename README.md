@@ -43,6 +43,7 @@ Proyecto_final_bioinfo/
 │
 ├── scripts/
     ├── principal.sh      # Script principal del flujo de trabajo
+    ├── telegram.sh      # Script para recibir mensajes en telegram
     ├── download.sh       # Descarga de datos desde RefSeq
     ├── extraccion.sh     # Extracción de secuencias génicas
     ├── codon_analisis.sh # Identificación y conteo de CTG
@@ -56,6 +57,7 @@ Proyecto_final_bioinfo/
 - grep 2.6.0 (para buscar patrones) 
 - awk 20200816
 - sed
+- datasets NCBI 18.24.0
 
 ## Reproducibilidad 
 

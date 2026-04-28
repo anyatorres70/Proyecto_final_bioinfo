@@ -63,4 +63,4 @@ send_telegram "Descarga completada: ${ARCHIVO}"
 unzip ${ARCHIVO} -d ${NOMBRE}
 
 echo "Datos listos en carpeta: ${NOMBRE}"
-send_telegram "📦 Descompresión lista: ${NOMBRE}"
+send_telegram "Archivo descomprimido: ${NOMBRE}"
