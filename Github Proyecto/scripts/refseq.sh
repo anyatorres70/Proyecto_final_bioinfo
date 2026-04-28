@@ -43,12 +43,13 @@ fi
 # =============
 datasets download genome taxon $TAXID \
     --assembly-source refseq \
-    --filename ${ARCHIVO}
+    --include cds \
+    --filename "${ARCHIVO}"
 
 #===================================
 # Verificar que ya está descargado
 #===================================
-if [ ! -s "${ARCHIVO}" ]; then
+if [ ! -f "${ARCHIVO}" ]; then
     echo "Error en la descarga"
     send_telegram "Error en descarga RefSeq (taxID $TAXID)"
     exit 1
