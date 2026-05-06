@@ -3,24 +3,18 @@
 #Anya Miranda 
 #script que se separen las secuencias en tripletes, se marquen los codones CTG y se cuenten
 
-# ==========================
-# Detectar ruta del script y el de los resultados
-# ==========================
-script_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-resultados_DIR="$script_DIR/../resultados"
-
-mkdir -p "$resultados_DIR"
-
-#para cargar el token y el ID
+# cargar config de rutas
+source "$(dirname "$0")/config.sh"
+#cargar el token y el ID
 source ../.env
-#para cargar la función de envío a telegram
+#cargar la función de envío a telegram
 source telegram.sh
 
-# ==========================
+# ===================================
 # Buscar archivo CDS automáticamente
-# ==========================
-INPUT=$(find "$script_DIR/.." -type f -name "*cds_from_genomic.fna" | head -n 1)
+# ===================================
+INPUT=$(find "$datos_descargados" -type f -name "*cds_from_genomic.fna" | head -n 1)
 
 if [ -z "$INPUT" ]; then
     echo "ERROR: No se encontró cds_from_genomic.fna"
@@ -31,24 +25,24 @@ fi
 echo "Archivo encontrado: $INPUT"
 send_telegram "Archivo encontrado: $(basename "$INPUT")"
 
-# ==========================
+# ===============
 # Definir output
-# ==========================
-OUTPUT="$resultados_DIR/resultados_ctg.fna"
+# ===============
+OUTPUT="$resultados/resultados_ctg.fna"
 
-# ==========================
+# ===================
 # Inicio de análisis
-# ==========================
+# ===================
 send_telegram "Iniciando análisis CTG..."
 
-# ==========================
+# ===============================
 # Procesamiento (tripletes + CTG)
-# ==========================
+# ================================
 
 awk '
-# ==========================
+# ===========================================
 # Encontrar un encabezado FASTA (nuevo gen)
-# ==========================
+# ============================================
 /^>/ {
 
     # Si ya había una secuencia previa guardada,la procesamos antes de pasar al siguiente gen
@@ -66,17 +60,17 @@ awk '
     next
 }
 
-# ==========================
+# =====================
 # Líneas de secuencia
-# ==========================
+# =====================
 {
     # Une todas las líneas del gen en una sola secuencia continua, (IMPORTANTE para no romper el marco de lectura)
     seq = seq $0
 }
 
-# ==========================
+# =====================
 # Al final del archivo
-# ==========================
+# =====================
 END {
     # Procesa la última secuencia (el último gen)
     if (seq) {
@@ -84,9 +78,9 @@ END {
     }
 }
 
-# ==========================
+# ================================
 # Función para procesar cada gen
-# ==========================
+# ================================
 function procesar(seq,   i, codon, count, out) {
 
     count = 0
@@ -117,9 +111,9 @@ function procesar(seq,   i, codon, count, out) {
 }
 ' "$INPUT" > "$OUTPUT"
 
-# ==========================
+# =====================
 # Verificar resultado
-# ==========================
+# =====================
 if [ ! -s "$OUTPUT" ]; then
     echo "Error en el procesamiento"
     send_telegram "Error en análisis CTG"

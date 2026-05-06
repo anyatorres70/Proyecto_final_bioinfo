@@ -26,9 +26,9 @@ NOMBRE="Debaryomyces_hansenii"
 ARCHIVO="$datos_descargados/${NOMBRE}.zip"
 CARPETA="$datos_descargados/${NOMBRE}"
 
-#=============
+#=========
 #inicio
-#=============
+#==========
 echo "Descargando RefSeq para taxID: $TAXID"
 send_telegram "Iniciando descarga RefSeq (taxID $TAXID)"
 
