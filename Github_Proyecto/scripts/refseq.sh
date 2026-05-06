@@ -30,7 +30,7 @@ CARPETA="$datos_descargados/${NOMBRE}"
 #inicio
 #==========
 echo "Descargando RefSeq para taxID: $TAXID"
-send_telegram "Iniciando descarga RefSeq (taxID $TAXID)"
+send_telegram "Iniciando descarga RefSeq (tax ID $TAXID)"
 
 #========================================
 #Evitar que se descargue varias veces
@@ -60,7 +60,7 @@ if [ ! -s "${ARCHIVO}" ]; then
 fi
 
 echo "Descarga completada"
-send_telegram "Descarga completada: ${ARCHIVO}"
+send_telegram "Descarga completada"
 
 #===============
 # Descomprimir
@@ -68,4 +68,4 @@ send_telegram "Descarga completada: ${ARCHIVO}"
 unzip "$ARCHIVO" -d "$CARPETA"
 
 echo "Datos listos en carpeta: ${CARPETA}"
-send_telegram "Archivo descomprimido: ${CARPETA}"
+send_telegram "Archivo descomprimido"
