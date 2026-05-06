@@ -13,9 +13,9 @@
   "accession": "GCF_000006445.2",
   "files": [
     {
-      "filePath": "GCF_000006445.2/GCF_000006445.2_ASM644v2_genomic.fna",
-      "fileType": "GENOMIC_NUCLEOTIDE_FASTA",
-      "uncompressedLengthBytes": "12334805"
+      "filePath": "GCF_000006445.2/cds_from_genomic.fna",
+      "fileType": "CDS_NUCLEOTIDE_FASTA",
+      "uncompressedLengthBytes": "10767041"
     }
   ]
 }]}

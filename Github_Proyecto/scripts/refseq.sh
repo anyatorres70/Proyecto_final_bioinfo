@@ -47,6 +47,7 @@ fi
 # =============
 datasets download genome taxon $TAXID \
     --assembly-source refseq \
+    --include cds \
     --filename ${ARCHIVO}
 
 #===================================
