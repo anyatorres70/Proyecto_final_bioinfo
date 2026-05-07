@@ -64,9 +64,9 @@ sort -t',' -k2,2nr "$datos_procesados/salida_3.txt" > "$datos_procesados/salida_
 
 echo "Archivo salida_ordenada.txt creado"
 
-# ==================== 
-# Mostrar resultados 
-# ====================
-echo ""
-echo "Top 10 genes con más CTG:"
-head "$datos_procesados/salida_ordenada.txt"
+# ========================= 
+# Mostrar una lista de 50 
+# =========================
+head -n 50 "$datos_procesados/salida_ordenada.txt" > "$resultados/top50_ctg.txt"
+
+echo "Archivo top50_ctg.txt creado en resultados"
