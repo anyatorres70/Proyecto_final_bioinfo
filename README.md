@@ -36,8 +36,7 @@ Proyecto_final_bioinfo/
 │
 ├── README.md
 ├── datos/
-│   ├── descargados/      # Datos descargados desde RefSeq
-│   └── procesados/       # Secuencias procesadas y separadas por gen
+│   ├── descargados/      # Datos descargados desde RefSeq y .zip
 │
 ├── resultados/           # Resultados finales (conteos, posiciones, lista)
 │
@@ -45,8 +44,8 @@ Proyecto_final_bioinfo/
     ├── principal.sh      # Script principal del flujo de trabajo
     ├── telegram.sh       # Script para recibir mensajes en telegram
     ├── refseq.sh         # Script para descarga de datos desde RefSeq
-    ├── analisis_ctg.sh   # Script para alinear secuencias, separar en codones, marcar y contar codones
-    ├── config.sh         # Script para decir en que carpeta quiero dejar las desacargas o resultados de analisis
+    ├── analisis_ctg.sh   # Alinear secuencias, separar en codones, marcar y contar codones
+    ├── config.sh         # Decir en que carpeta dejar las desacargas/resultados de analisis
 
 
 
