@@ -38,10 +38,10 @@ send_telegram "Número de secuencias encontradas: $conteo"
 # >lcl|...
 # #CTG_conteo=...
 
-grep -E "(^>.+$|^#.+$)" "$INPUT" > "$datos_procesados/salida_1.txt"
+grep -E "(^>.+$|^#.+$)" "$INPUT" > "$datos_procesados/encabezado+conteo.txt"
 
-echo "Archivo salida_1.txt creado"
-send_telegram "salida_1.txt generado correctamente"
+echo "Archivo encabezado+conteo.txt creado"
+send_telegram "encabezado+conteo.txt generado correctamente"
 
 # =================================
 # Extraer nombre del gen + conteo
@@ -50,10 +50,10 @@ send_telegram "salida_1.txt generado correctamente"
 # DEHA2A00110g
 # #CTG_conteo=12
 
-grep -oE '(DEHA.+g]|^#.+$)' "$datos_procesados/salida_1.txt" > "$datos_procesados/salida_2.txt"
+grep -oE '(DEHA.+g]|^#.+$)' "$datos_procesados/encabezado+conteo.txt" > "$datos_procesados/ID+conteo.txt"
 
-echo "Archivo salida_2.txt creado"
-send_telegram "salida_2.txt generado correctamente"
+echo "Archivo ID+conteo.txt creado"
+send_telegram "ID+conteo.txt generado correctamente"
 
 # =======================================
 # Unir nombre gen + conteo en una línea
@@ -65,16 +65,16 @@ send_telegram "salida_2.txt generado correctamente"
 # en:
 # DEHA2A00110g,12
 
-sed 'N;s/]\n#CTG_conteo=/,/' "$datos_procesados/salida_2.txt" > "$datos_procesados/salida_3.txt"
+sed 'N;s/]\n#CTG_conteo=/,/' "$datos_procesados/ID+conteo.txt" > "$datos_procesados/ID-codon.txt"
 
-echo "Archivo salida_3.txt creado"
-send_telegram "salida_3.txt generado correctamente"
+echo "Archivo ID-codon.txt creado"
+send_telegram "ID-codon.txt generado correctamente"
 
 # ==========================
 # Ordenar de mayor a menor
 # ==========================
 
-sort -t',' -k2,2nr "$datos_procesados/salida_3.txt" > "$datos_procesados/salida_ordenada.txt"
+sort -t',' -k2,2nr "$datos_procesados/ID-codon.txt" > "$resultados/salida_ordenada.txt"
 
 echo "Archivo salida_ordenada.txt creado"
 send_telegram "salida_ordenada.txt generado correctamente"
@@ -85,4 +85,4 @@ send_telegram "salida_ordenada.txt generado correctamente"
 head -n 50 "$datos_procesados/salida_ordenada.txt" > "$resultados/top50_ctg.txt"
 
 echo "Archivo top50_ctg.txt creado en resultados"
-send_telegram "Archivo top50_ctg.txt creado en resultados"
+send_telegram "Top 50 creado en resultados"

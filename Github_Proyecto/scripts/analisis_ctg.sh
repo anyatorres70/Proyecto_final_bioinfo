@@ -28,7 +28,7 @@ send_telegram "Archivo encontrado: $(basename "$INPUT")"
 # ===============
 # Definir output
 # ===============
-OUTPUT="$resultados/resultados_ctg.fna"
+OUTPUT="$datos_procesados/resultados_ctg.fna"
 
 # ===================
 # Inicio de análisis
