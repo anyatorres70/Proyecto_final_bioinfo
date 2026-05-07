@@ -68,4 +68,4 @@ send_telegram "Descarga completada"
 unzip "$ARCHIVO" -d "$CARPETA"
 
 echo "Datos listos en carpeta: ${CARPETA}"
-send_telegram "Archivo descomprimido"
+send_telegram "Archivo descomprimido en ${CARPETA}"
