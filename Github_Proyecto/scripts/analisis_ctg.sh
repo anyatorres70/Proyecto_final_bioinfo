@@ -5,7 +5,7 @@
 
 
 # cargar config de rutas
-source "$(dirname "$0")/config.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/config.sh"
 #cargar el token y el ID
 source ../.env
 #cargar la función de envío a telegram

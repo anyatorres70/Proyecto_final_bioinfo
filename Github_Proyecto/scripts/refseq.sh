@@ -13,7 +13,7 @@
 # ===========================================
 
 #para que los archivos se descarguen en datos/descargados
-source "$(dirname "$0")/config.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/config.sh"
 #para cargar el token y el ID
 source ../.env
 #para cargar la función de envío a telegram
