@@ -11,9 +11,9 @@ source ../.env
 #cargar la función de envío a telegram
 source telegram.sh
 
-# ===================================
-# Buscar archivo CDS automáticamente
-# ===================================
+# ==================
+# Buscar archivo CDS 
+# ===================
 INPUT=$(find "$datos_descargados" -type f -name "*cds_from_genomic.fna" | head -n 1)
 
 if [ -z "$INPUT" ]; then
@@ -43,40 +43,37 @@ awk '
 # ===========================================
 # Encontrar un encabezado FASTA (nuevo gen)
 # ============================================
-/^>/ {
+/^>/ { if (seq) procesar(seq); print; seq=""; next }
 
-    # Si ya había una secuencia previa guardada,la procesamos antes de pasar al siguiente gen
-    if (seq) {
-        procesar(seq)
-    }
+  #  # Si ya había una secuencia previa guardada,la procesamos antes de pasar al siguiente gen
+   # if (seq) {
+    #    procesar(seq)
+    #}
 
     # Imprime el encabezado (>gene_id ...)
-    print
+    #print
 
     # Reinicia la secuencia para el nuevo gen
-    seq = ""
+    #seq = ""
 
     # Pasa a la siguiente línea
-    next
-}
+    #next
 
 # =====================
 # Líneas de secuencia
 # =====================
-{
+{ seq = seq $0 }
     # Une todas las líneas del gen en una sola secuencia continua, (IMPORTANTE para no romper el marco de lectura)
-    seq = seq $0
-}
 
 # =====================
 # Al final del archivo
 # =====================
-END {
+END { if (seq) procesar(seq) }
+
+#END {
     # Procesa la última secuencia (el último gen)
-    if (seq) {
-        procesar(seq)
-    }
-}
+  #  if (seq) {
+   #     procesar(seq)
 
 # ================================
 # Función para procesar cada gen
