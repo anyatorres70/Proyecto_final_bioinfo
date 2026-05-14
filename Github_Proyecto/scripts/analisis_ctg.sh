@@ -40,71 +40,52 @@ send_telegram "Iniciando análisis CTG..."
 # ================================
 
 awk '
-# ===========================================
-# Encontrar un encabezado FASTA (nuevo gen)
-# ============================================
+#para encontrar un encabezado FASTA/si ya había una secuencia analizar antes de pasar a la sig/print imprime encabezado/seq= reinicia secuencia para nuevo gen/next pasa a sig linea
 /^>/ { if (seq) procesar(seq); print; seq=""; next }
 
-  #  # Si ya había una secuencia previa guardada,la procesamos antes de pasar al siguiente gen
-   # if (seq) {
-    #    procesar(seq)
-    #}
-
-    # Imprime el encabezado (>gene_id ...)
-    #print
-
-    # Reinicia la secuencia para el nuevo gen
-    #seq = ""
-
-    # Pasa a la siguiente línea
-    #next
-
-# =====================
-# Líneas de secuencia
-# =====================
+#une todas las lineas en una sola secuencia para no romper marco de lectura
 { seq = seq $0 }
-    # Une todas las líneas del gen en una sola secuencia continua, (IMPORTANTE para no romper el marco de lectura)
 
-# =====================
-# Al final del archivo
-# =====================
+#al final del archivo procesa la última seq
 END { if (seq) procesar(seq) }
 
-#END {
-    # Procesa la última secuencia (el último gen)
-  #  if (seq) {
-   #     procesar(seq)
+#funcion para procesar cada gen/posicion/guarda triplete/cuenta/salida
+function procesar(seq, i, codon, count, total, porcentaje, out) {
 
-# ================================
-# Función para procesar cada gen
-# ================================
-function procesar(seq,   i, codon, count, out) {
+    count=0
+    total=0
+    out=""
 
-    count = 0
-    out = ""
+#recorrer seq 3 en 3
+    for (i=1; i<=length(seq); i+=3) {
 
-    # recorrer la secuencia en pasos de 3 (frame correcto)
-    for (i = 1; i <= length(seq); i += 3) {
+        codon=substr(seq,i,3)
 
-        codon = substr(seq, i, 3)
+        #si codon completo
+        if (length(codon)==3) {
 
-        # si el codón está completo
-        if (length(codon) == 3) {
+            total++
 
-            if (codon == "CTG") {
-                out = out "[CTG] "
+            if (codon=="CTG") {
+                out=out "[CTG] "
                 count++
             } else {
-                out = out codon " "
+                out=out codon " "
             }
         }
     }
 
-    # imprimir secuencia procesada
-    print out
+ if (total > 0) {
+        porcentaje = (count / total) * 100
+    } else {
+        porcentaje = 0
+    }
 
-    # imprimir conteo real
-    print "#CTG_conteo="count
+#imprimir seq procesada
+    print out
+    print "#CTG_conteo=" count
+    print "#Codones_totales=" total
+    printf "#Frecuencia_CTG=%.4f%%\n", porcentaje
 }
 ' "$INPUT" > "$OUTPUT"
 

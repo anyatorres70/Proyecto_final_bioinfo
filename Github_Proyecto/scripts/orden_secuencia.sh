@@ -82,7 +82,7 @@ send_telegram "salida_ordenada.txt generado correctamente"
 # ========================= 
 # Mostrar una lista de 50 
 # =========================
-head -n 50 "$datos_procesados/salida_ordenada.txt" > "$resultados/top50_ctg.txt"
+head -n 50 "$resultados/salida_ordenada.txt" > "$resultados/top50_ctg.txt"
 
 echo "Archivo top50_ctg.txt creado en resultados"
 send_telegram "Top 50 creado en resultados"

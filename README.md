@@ -47,7 +47,7 @@ Proyecto_final_bioinfo/
     ├── refseq.sh          # Descarga de datos desde RefSeq
     ├── analisis_ctg.sh    # Alinear secuencias, separar en codones, marcar y contar codones
     ├── config.sh          # Decir en que carpeta dejar las desacargas/resultados de analisis
-    ├── orden_secuencia.sh # 
+    ├── orden_secuencia.sh # Orden por ID y num. de codones de mayor a menor frecuencia
 
 
 
