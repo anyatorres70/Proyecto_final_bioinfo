@@ -34,33 +34,34 @@ Se automatizará el análisis del codón CTG en el genoma de *D. hansenii* a par
 
 - Descarga de secuencias CDS: 
   
-  Se descargan automáticamente las secuencias codificantes (CDS) del genoma de *D. hansenii* desde la base de datos RefSeq mediante la herramienta datasets de NCBI.
+    Se descargan automáticamente las secuencias codificantes (CDS) del genoma de *D. hansenii* desde la base de datos RefSeq mediante la herramienta datasets de NCBI.
 
 - Extracción y organización de secuencias: 
   
-  Las secuencias génicas descargadas se organizan conservando los identificadores originales de cada gen.
+    Las secuencias génicas descargadas se organizan conservando los identificadores originales de cada gen.
 
 - Procesamiento de secuencias: 
   
-  Cada secuencia se acomoda en una sola línea de texto y se divide en tripletes (codones) respetando el marco de lectura.
+    Cada secuencia se acomoda en una sola línea de texto y se divide en tripletes (codones) respetando el marco de lectura.
 
 - Identificación y conteo de codones CTG: 
   
-  Se identifican todos los codones CTG presentes en cada gen, se calcula el número total de codones por secuencia y se marcan sus posiciones dentro de la secuencia con corchetes [CTG].
+    Se identifican todos los codones CTG presentes en cada gen, se calcula el número total de codones por secuencia y se marcan sus posiciones dentro de la secuencia con corchetes [CTG].
 
 - Cálculo de frecuencia relativa: 
   
-  Para cada gen se tendrá su tamaño total y calcula el porcentaje de frecuencia del codón CTG con respecto al tamaño de su secuencia. 
+    Se determina el tamaño de cada secuencia y se calcula el porcentaje de frecuencia del codón CTG con respecto al tamaño de su secuencia. 
 
 - Organización y ordenamiento de resultados: 
   
-  Se tendrá una salida con cuatro columnas: 
-  - ID, Número de codones CTG, tamaño secuencia, Frecuencia relativa de CTG (%)
-  Después se ordenan de acuerdo con la cantidad de codones CTG (de mayor a menor).
+    Se obtendrá una salida con cuatro columnas: 
+    - ID, Número de codones CTG, tamaño secuencia, Frecuencia relativa de CTG (%)
+  
+    Después se ordenarán de acuerdo con la cantidad de codones CTG (de mayor a menor).
 
 - Generación de salidas: 
   
-  Se generan archivos de salida con la información procesada para su análisis posterior, incluyendo una lista completa de genes procesados y un archivo con el top 50 de genes con mayor número de codones CTG. 
+    Se generarán archivos de salida con la información procesada para su análisis posterior, incluyendo una lista completa de genes procesados y un archivo con el top 50 de genes con mayor número de codones CTG. 
 
 ## Estructura del repositorio
 
