@@ -11,7 +11,7 @@ Muchos de los estudios que se han hecho con respecto a este uso del codón, se h
 Ahora bien, estudios recientes han demostrado que la maquinaria del tRNA<sub>CAG</sub> de *D. hansenii* es casi idéntico al de *C. albicans*, por lo que se cree que el funcionamiento y uso ambiguo de este codón es muy parecido y puede tener repercusiones fisiológicas similares en *D. hansenii* (5).
 Por lo tanto, conocer que genes tienen una mayor frecuencia de CTG, así como la posición que ocupa dentro de la secuencia es muy importante para comprender su posible impacto funcional. El que un gen presenta una gran cantidad de codones CTG podría aumentar la posibilidad de que ocurra incorporación ambigua de Ser o Leu durante la traducción, especialmente bajo condiciones de estrés, afectando la estructura y función de sus proteínas, lo que podría llegar a afectar su morfología y fisiología.
 
-Este proyecto busca analizar secuencias genómicas de *D. hansenii* a partir de datos de RefSeq. El flujo de trabajo automatiza la descarga del genoma, la extracción de secuencias génicas individuales y su procesamiento para identificar especificamente codones CTG. 
+Este proyecto busca analizar secuencias genómicas de *D. hansenii* a partir de datos de RefSeq. El flujo de trabajo automatiza la descarga del genoma, la extracción de secuencias individuales y su procesamiento para identificar especificamente codones CTG. 
 En particular, se centra en la identificación y cuantificación del codón CTG dentro de cada gen. Se dividen las secuencias en tripletes (codones), cuenta la frecuencia de CTG por gen y permite identificar su posición dentro de las secuencias. Además de señalar el tamaño total de la secuencia y el porcentaje que tiene el codón CTG con respecto a su tamaño. Esto facilita el análisis de patrones de uso de codones y puede ser útil para analizar secuencias de otros organismos donde se interese reconocer codones especificos dentro de sus secuencias. 
 
 Referencias
@@ -25,16 +25,16 @@ Referencias
 
 Hacer un script en bash que permita analizar la frecuencia del codón CTG en el genoma de *Debaryomyces hansenii*. 
 
-Se automatizará la descarga del genoma (RefSeq) para después procesar las secuencias génicas dividiéndolas en tripletes (codones), se identificará y contabilizará la frecuencia del codón CTG en cada gen, el tamaño total de cada secuencia y el porcentaje de presencia con respecto a su tamaño. 
-Finalmente se generará una salida que muestre, para cada gen, su identificador (ID), el número de codones CTG, la frecuencia relativa de CTG (%). Esto se encontrará ordenado en función de la cantidad de codones CTG (de mayor a menor frecuencia) y así poder seleccionar un grupo de genes con la mayor cantidad de codones CTG para análisis posteriores relacionados con expresión génica y respuesta a condiciones de estrés. 
+Se automatizará la descarga del genoma (RefSeq) para después procesar las secuencias dividiéndolas en tripletes (codones), se identificará y contabilizará la frecuencia del codón CTG en cada gen, el tamaño total de cada secuencia y el porcentaje de presencia con respecto a su tamaño. 
+Finalmente se generará una salida que muestre, para cada gen, su identificador (ID), el número de codones CTG, el tamaño total de la secuencia y la frecuencia relativa de CTG (%). Esto se encontrará ordenado en función de la cantidad de codones CTG (de mayor a menor frecuencia) y así poder seleccionar un grupo de genes con la mayor cantidad de codones CTG para análisis posteriores relacionados con expresión génica y respuesta a condiciones de estrés. 
 
 ## Descripción del flujo de trabajo
 
-Se va a automatizar el análisis del codón CTG en el genoma de *D. hansenii* a partir de datos RefSeq. El flujo de trabajo sigue los siguientes pasos principales:
+Se automatizará el análisis del codón CTG en el genoma de *D. hansenii* a partir de datos RefSeq. El flujo de trabajo sigue los siguientes pasos principales:
 
 - Descarga de secuencias CDS: 
   
-  Se descargan automáticamente las secuencias codificantes (CDS) del genoma de D. hansenii desde la base de datos RefSeq mediante la herramienta datasets de NCBI.
+  Se descargan automáticamente las secuencias codificantes (CDS) del genoma de *D. hansenii* desde la base de datos RefSeq mediante la herramienta datasets de NCBI.
 
 - Extracción y organización de secuencias: 
   
@@ -42,7 +42,7 @@ Se va a automatizar el análisis del codón CTG en el genoma de *D. hansenii* a 
 
 - Procesamiento de secuencias: 
   
-  Cada secuencia se une y divide en tripletes (codones) respetando el marco de lectura.
+  Cada secuencia se acomoda en una sóla línea de texto y divide en tripletes (codones) respetando el marco de lectura.
 
 - Identificación y conteo de codones CTG: 
   
