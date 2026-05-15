@@ -14,8 +14,6 @@
 
 #para que los archivos se descarguen en datos/descargados
 source "$(dirname "${BASH_SOURCE[0]}")/config.sh"
-#para cargar el token y el ID
-source ../.env
 #para cargar la función de envío a telegram
 source telegram.sh
 
@@ -30,7 +28,7 @@ CARPETA="$datos_descargados/${NOMBRE}"
 #inicio
 #==========
 echo "Descargando RefSeq para taxID: $TAXID"
-send_telegram "Iniciando descarga RefSeq (tax ID $TAXID)"
+enviar_telegram "Iniciando descarga RefSeq (tax ID $TAXID)"
 
 #========================================
 #Evitar que se descargue varias veces
@@ -38,7 +36,7 @@ send_telegram "Iniciando descarga RefSeq (tax ID $TAXID)"
 
 if [ -d "${CARPETA}" ]; then
     echo "Ya existe la carpeta de datos"
-    send_telegram "Ya existían datos: ${NOMBRE}"
+    enviar_telegram "Ya existían datos: ${NOMBRE}"
     exit 0
 fi
 
@@ -55,12 +53,12 @@ datasets download genome taxon $TAXID \
 #===================================
 if [ ! -s "${ARCHIVO}" ]; then
     echo "Error en la descarga"
-    send_telegram "Error en descarga RefSeq (taxID $TAXID)"
+    enviar_telegram "Error en descarga RefSeq (taxID $TAXID)"
     exit 1
 fi
 
 echo "Descarga completada"
-send_telegram "Descarga completada"
+enviar_telegram "Descarga de datos completada"
 
 #===============
 # Descomprimir
@@ -68,4 +66,4 @@ send_telegram "Descarga completada"
 unzip "$ARCHIVO" -d "$CARPETA"
 
 echo "Datos listos en carpeta: ${CARPETA}"
-send_telegram "Archivo descomprimido en ${CARPETA}"
+enviar_telegram "Archivo descomprimido en ${CARPETA}"

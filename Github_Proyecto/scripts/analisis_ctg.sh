@@ -6,8 +6,6 @@
 
 # cargar config de rutas
 source "$(dirname "${BASH_SOURCE[0]}")/config.sh"
-#cargar el token y el ID
-source ../.env
 #cargar la función de envío a telegram
 source telegram.sh
 
@@ -18,12 +16,12 @@ INPUT=$(find "$datos_descargados" -type f -name "*cds_from_genomic.fna" | head -
 
 if [ -z "$INPUT" ]; then
     echo "ERROR: No se encontró cds_from_genomic.fna"
-    send_telegram "Error: no se encontró archivo cds"
+    enviar_telegram "Error: no se encontró archivo cds"
     exit 1
 fi
 
 echo "Archivo encontrado: $INPUT"
-send_telegram "Archivo encontrado: $(basename "$INPUT")"
+enviar_telegram "Archivo encontrado: $(basename "$INPUT")"
 
 # ===============
 # Definir output
@@ -33,7 +31,7 @@ OUTPUT="$datos_procesados/resultados_ctg.fna"
 # ===================
 # Inicio de análisis
 # ===================
-send_telegram "Iniciando análisis CTG..."
+enviar_telegram "Iniciando análisis CTG..."
 
 # ===============================
 # Procesamiento (tripletes + CTG)
@@ -94,9 +92,9 @@ function procesar(seq, i, codon, count, total, porcentaje, out) {
 # =====================
 if [ ! -s "$OUTPUT" ]; then
     echo "Error en el procesamiento"
-    send_telegram "Error en análisis CTG"
+    enviar_telegram "Error en análisis CTG"
     exit 1
 fi
 
 echo "Archivo generado: $OUTPUT"
-send_telegram "Análisis terminado. Archivo generado: $(basename "$OUTPUT")"
+enviar_telegram "Análisis terminado. Archivo generado: $(basename "$OUTPUT")"

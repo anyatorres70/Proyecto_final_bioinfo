@@ -6,7 +6,7 @@
 source ../.env
 #cargamos ID y TOKEN
 
-send_telegram() {
+enviar_telegram() {
   local mensaje="$1"
 
 curl -s -X POST "https://api.telegram.org/bot${TOKEN}/sendMessage" \

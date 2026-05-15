@@ -20,5 +20,6 @@ resultados="$proyecto_DIR/resultados"
 # ================================
 # Crear directorios si no existen
 # =================================
+mkdir -p "$datos_procesados"
 mkdir -p "$datos_descargados"
 mkdir -p "$resultados"

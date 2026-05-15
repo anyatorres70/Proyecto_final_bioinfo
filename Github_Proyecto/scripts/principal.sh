@@ -3,50 +3,59 @@
 #Anya Miranda 
 #script que junta diferentes source para poder descargar una secuencia genomica por genes, separar cada secuencia en codones, marcar codones especificos (como CTG), contar la cantidad de codones que tiene cada uno y ordenarlos de mayor a menor cantidad de codones
 
-# ================
-# Ruta del script
-# ================
-script_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# ===================
+# Configuración rutas
+# ====================
 
-# ==========================
-# Cargar config y telegram
-# ==========================
-source "$script_DIR/config.sh"
-source "$script_DIR/../.env"
-source "$script_DIR/telegram.sh"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# =================
-# Inicio analisis
-# =================
-echo "Iniciando analisis completo"
-send_telegram "Iniciando analisis completo"
+source "$SCRIPT_DIR/config.sh"
+source "$SCRIPT_DIR/telegram.sh"
 
 # ==================
-# Paso 1: Descarga
+# Mensaje de inicio
 # ==================
-echo "Paso 1: Descarga RefSeq"
-bash "$script_DIR/refseq.sh"
+echo "Iniciando el análisis completo"
+enviar_telegram "Iniciando el análisis completo"
+
+# ==================
+# Descargar RefSeq
+# ==================
+bash "$SCRIPT_DIR/refseq.sh"
 
 if [ $? -ne 0 ]; then
-    echo "Error en descarga"
-    send_telegram "Error en descarga RefSeq"
+    echo "Error en la descarga de RefSeq"
+    enviar_telegram "Error en la descarga de RefSeq"
     exit 1
-fi
 
-# ======================
-# Paso 2: Análisis CTG
-# ======================
-echo "Paso 2: Análisis CTG"
-bash "$script_DIR/analisis_ctg.sh"
-
-if [ $? -ne 0 ]; then
-    echo "Error en análisis"
-    send_telegram "Error en análisis CTG"
-    exit 1
 fi
 
 # ==============
-# Fin analisis
+# Análisis CTG
 # ==============
-echo "Analisis completado correctamente"
-send_telegram "Analisis completado con éxito"
+bash "$SCRIPT_DIR/analisis_ctg.sh"
+
+if [ $? -ne 0 ]; then
+    echo "Error en el análisis del codon CTG"
+    enviar_telegram "Error en el análisis del codon CTG"
+    exit 1
+
+fi
+
+# =====================
+# Ordenar resultados
+# =====================
+bash "$SCRIPT_DIR/orden_secuencia.sh"
+
+if [ $? -ne 0 ]; then
+    echo "Error al ordenar las secuencias"
+    enviar_telegram "Error al ordenar las secuencias"
+    exit 1
+
+fi
+
+# ======
+# Final
+# ======
+echo "Analisis terminado correctamente"
+enviar_telegram "Analisis terminado correctamente"

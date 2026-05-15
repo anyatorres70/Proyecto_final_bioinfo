@@ -17,7 +17,7 @@ INPUT="$datos_procesados/resultados_ctg.fna"
 #inicio
 #==========
 echo "Ordenando IDs y cantidad de codones por tamaños"
-send_telegram "Ordenando IDs y cantidad de codones por tamaños"
+enviar_telegram "Ordenando IDs y cantidad de codones por tamaños"
 
 # ========================
 # Contar encabezados FASTA
@@ -26,7 +26,7 @@ send_telegram "Ordenando IDs y cantidad de codones por tamaños"
 echo "Número de secuencias:"
 conteo=$(grep -c "^>" "$INPUT")
 echo "$conteo"
-send_telegram "Número de secuencias encontradas: $conteo"
+enviar_telegram "Número de secuencias encontradas: $conteo"
 
 # También podría hacerse así:
 # grep "^>" "$ENTRADA" | wc -l
@@ -40,8 +40,8 @@ send_telegram "Número de secuencias encontradas: $conteo"
 
 grep -E "(^>.+$|^#.+$)" "$INPUT" > "$datos_procesados/encabezado+conteo.txt"
 
-echo "Archivo encabezado+conteo.txt creado"
-send_telegram "encabezado+conteo.txt generado correctamente"
+echo "Archivo encabezado/conteo.txt creado"
+enviar_telegram "encabezado/conteo.txt creado correctamente"
 
 # =================================
 # Extraer nombre del gen + conteo
@@ -52,8 +52,8 @@ send_telegram "encabezado+conteo.txt generado correctamente"
 
 grep -oE '(DEHA[^]]+g\]|^#CTG_conteo=.*$|^#Codones_totales=.*$|^#Frecuencia_CTG=.*$)' "$datos_procesados/encabezado+conteo.txt" > "$datos_procesados/ID+conteo+total+porcentaje.txt"
 
-echo "Archivo ID+conteo+total+porcentaje.txt creado"
-send_telegram "ID+conteo+total+porcentajeo.txt generado correctamente"
+echo "Archivo ID/conteo/total/porcentaje.txt creado"
+enviar_telegram "ID/conteo/total/porcentajeo.txt creado correctamente"
 
 # =======================================
 # Unir nombre gen + conteo en una línea
@@ -68,7 +68,7 @@ send_telegram "ID+conteo+total+porcentajeo.txt generado correctamente"
 sed -n '/^DEHA/{N;N;N;s/]\n#CTG_conteo=/,/;s/\n#Codones_totales=/,/;s/\n#Frecuencia_CTG=/,/;s/%//;p;}' "$datos_procesados/ID+conteo+total+porcentaje.txt" > "$datos_procesados/ID-codon-total-porcentaje.txt"
 
 echo "Archivo ID-codon-total-porcentaje.txt creado"
-send_telegram "ID-codon-total-porcentaje.txt generado correctamente"
+enviar_telegram "ID-codon-total-porcentaje.txt creado correctamente"
 
 # ==========================
 # Ordenar de mayor a menor
@@ -77,7 +77,7 @@ send_telegram "ID-codon-total-porcentaje.txt generado correctamente"
 sort -t',' -k2,2nr "$datos_procesados/ID-codon-total-porcentaje.txt" > "$resultados/salida_ordenada.txt"
 
 echo "Archivo salida_ordenada.txt creado"
-send_telegram "salida_ordenada.txt generado correctamente"
+enviar_telegram "salida_ordenada.txt creado correctamente"
 
 # ========================= 
 # Mostrar una lista de 50 
@@ -85,4 +85,4 @@ send_telegram "salida_ordenada.txt generado correctamente"
 head -n 50 "$resultados/salida_ordenada.txt" > "$resultados/top50_ctg.txt"
 
 echo "Archivo top50_ctg.txt creado en resultados"
-send_telegram "Top 50 creado en resultados"
+enviar_telegram "Top 50 creado en resultados"
