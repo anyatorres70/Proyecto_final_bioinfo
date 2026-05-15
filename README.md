@@ -23,27 +23,43 @@ Referencias
 
 ## Objetivos
 
-Hacer un script en bash que permita analizar la frecuencia del codón CTG en el genoma de *Debaryomyces hansenii*. Se automatizará la descarga del genoma (RefSeq) para después procesar las secuencias génicas dividiéndolas en tripletes (codones), se identificará y contabilizará la frecuencia del codón CTG en cada gen, el tamaño total de cada secuencia y el porcentaje de presencia con respecto a su tamaño. Finalmente se generará una salida que muestre, para cada gen, su identificador (ID), el número de codones CTG, la frecuencia relativa de CTG (%). Esto se encontrará ordenado en función de la cantidad de codones CTG (de mayor a menor frecuencia) y así poder seleccionar un grupo de genes con la mayor cantidad de codones CTG para análisis posteriores relacionados con expresión génica y respuesta a condiciones de estrés. 
+Hacer un script en bash que permita analizar la frecuencia del codón CTG en el genoma de *Debaryomyces hansenii*. 
+
+Se automatizará la descarga del genoma (RefSeq) para después procesar las secuencias génicas dividiéndolas en tripletes (codones), se identificará y contabilizará la frecuencia del codón CTG en cada gen, el tamaño total de cada secuencia y el porcentaje de presencia con respecto a su tamaño. 
+Finalmente se generará una salida que muestre, para cada gen, su identificador (ID), el número de codones CTG, la frecuencia relativa de CTG (%). Esto se encontrará ordenado en función de la cantidad de codones CTG (de mayor a menor frecuencia) y así poder seleccionar un grupo de genes con la mayor cantidad de codones CTG para análisis posteriores relacionados con expresión génica y respuesta a condiciones de estrés. 
 
 ## Descripción del flujo de trabajo
 
 Se va a automatizar el análisis del codón CTG en el genoma de *D. hansenii* a partir de datos RefSeq. El flujo de trabajo sigue los siguientes pasos principales:
 
 - Descarga de secuencias CDS: 
+  
   Se descargan automáticamente las secuencias codificantes (CDS) del genoma de D. hansenii desde la base de datos RefSeq mediante la herramienta datasets de NCBI.
+
 - Extracción y organización de secuencias: 
+  
   Las secuencias génicas descargadas se organizan conservando los identificadores originales de cada gen.
+
 - Procesamiento de secuencias: 
+  
   Cada secuencia se une y divide en tripletes (codones) respetando el marco de lectura.
+
 - Identificación y conteo de codones CTG: 
+  
   Se encuentran todos los codones CTG presentes en cada gen, se calcula el número total de codones por secuencia y se marcan sus posiciones dentro de la secuencia.
+
 - Cálculo de frecuencia relativa: 
+  
   Para cada gen se tendrá su tamaño total y calcula el porcentaje de frecuencia del codón CTG con respecto al tamaño de su secuencia. 
+
 - Organización y ordenamiento de resultados: 
+  
   Se tendrá una salida con cuatro columnas: 
   - ID, Número de codones CTG, tamaño secuencia, Frecuencia relativa de CTG (%)
   Después se ordenan de acuerdo con la cantidad de codones CTG (de mayor a menor).
+
 - Generación de salidas: 
+  
   Se generan archivos de salida con la información procesada para su análisis posterior, incluyendo una lista completa de genes procesados y un archivo con el top 50 de genes con mayor número de codones CTG. 
 
 ## Estructura del repositorio
@@ -87,22 +103,24 @@ Importante: Para poder usar `telegram.sh` es necesario configurar un archivo `.e
 ## Reproducibilidad 
 
 Puede ejecutarse directamente en cualquier sistema Linux (o macOS) que cuente con las herramientas necesarias ya instaladas, no requiere la creación de entornos virtuales o contenedores.
+
 La estructura del proyecto permite reproducir el análisis completo ejecutando solo el script principal (`principal.sh`), el cual automatiza la descarga de datos, el procesamiento de secuencias y la generación de resultados.
 
 ## Instrucciones de uso
 
-#Clonar el repositorio
+- Clonar el repositorio
 git clone https://github.com/anyatorres70/Proyecto_final_bioinfo.git
 
-#Entrar al directorio del proyecto
+- Entrar al directorio del proyecto
 cd Proyecto_final_bioinfo
 
-#Ejecutar el pipeline
+- Ejecutar el pipeline
 bash scripts/principal.sh
 
 ## Entradas y salidas
 
 - Entradas: 
+  
   Archivo FASTA con secuencias codificantes (CDS) de *D. hansenii* descargado desde RefSeq (NCBI Datasets) (cds_from_genomic.fna).
   
 
@@ -110,20 +128,31 @@ bash scripts/principal.sh
 
 
   datos/procesados/
+
   - resultados_ctg.fna:
+  
       Archivo FASTA con las secuencias separadas por gen y divididas en tripletes, marcando el codón como [CTG]. Conteo del número de codones CTG por gen, cálculo del tamaño total por secuencia y cálculo del porcentaje de frecuencia del codón CTG con respecto al tamaño total.
+
   - encabezado+conteo.txt:
+  
       Archivo .txt con los encabezados completos, el conteo de CTGs, codones totales y frecuencia relativa.
+
   - ID+conteo+total+porcentaje.txt:
+  
       Archivo con el ID, el conteo de CTGs, codones totales y frecuencia relativa.
+  
   - ID-codon-total-porcentaje.txt: 
+  
       Archivo con lineas unidas de ID, conteo de CTGs, codones totales y frecuencia relativa.
   
   
   resultados/
   - salida_ordenada.txt: 
+  
       Lista completa de genes ordenados de mayor a menor según la cantidad de codones CTG.
+
   - top50_ctg.txt: 
+  
       Archivo con el top 50 de genes con mayor número de codones CTG.
 
     ## Ejemplo de salida
