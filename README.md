@@ -157,9 +157,9 @@ bash scripts/principal.sh
 
     ## Ejemplo de salida
 
-    DEHA2G00110g,31,1459,2.1247
-    DEHA2A00110g,29,1409,2.0582
-    DEHA2G01276g,28,1409,1.9872
+    - DEHA2G00110g,31,1459,2.1247
+    - DEHA2A00110g,29,1409,2.0582
+    - DEHA2G01276g,28,1409,1.9872
 
     Columnas (separadas por comas):
 
