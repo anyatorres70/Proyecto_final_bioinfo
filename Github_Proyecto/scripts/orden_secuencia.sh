@@ -34,7 +34,7 @@ enviar_telegram "Número de secuencias encontradas: $conteo"
 # =========================
 # Extraer IDs y conteos
 # =========================
-# Queremos quedarnos SOLO con:
+# Queremos quedarnos solo con:
 # >lcl|...
 # #CTG_conteo=...
 
@@ -49,6 +49,8 @@ enviar_telegram "encabezado/conteo.txt creado correctamente"
 # Aquí obtenemos:
 # DEHA2A00110g
 # #CTG_conteo=12
+# #Codones_totales=1409
+# #Frecuencia_CTG=2.0582%
 
 grep -oE '(DEHA[^]]+g\]|^#CTG_conteo=.*$|^#Codones_totales=.*$|^#Frecuencia_CTG=.*$)' "$datos_procesados/encabezado+conteo.txt" > "$datos_procesados/ID+conteo+total+porcentaje.txt"
 
@@ -62,8 +64,10 @@ enviar_telegram "ID/conteo/total/porcentajeo.txt creado correctamente"
 #
 # DEHA2A00110g]
 # #CTG_conteo=12
+# #Codones_totales=1409
+# #Frecuencia_CTG=2.0582%
 # en:
-# DEHA2A00110g,12
+# DEHA2A00110g,12,1409,2.0582
 
 sed -n '/^DEHA/{N;N;N;s/]\n#CTG_conteo=/,/;s/\n#Codones_totales=/,/;s/\n#Frecuencia_CTG=/,/;s/%//;p;}' "$datos_procesados/ID+conteo+total+porcentaje.txt" > "$datos_procesados/ID-codon-total-porcentaje.txt"
 
