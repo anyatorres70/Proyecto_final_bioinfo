@@ -107,6 +107,12 @@ Puede ejecutarse directamente en cualquier sistema Linux (o macOS) que cuente co
 
 La estructura del proyecto permite reproducir el análisis completo ejecutando solo el script principal (`principal.sh`), el cual automatiza la descarga de datos, el procesamiento de secuencias y la generación de resultados.
 
+Puede ser adaptado a otros organismos, siempre que se descarguen archivos CDS en formato FASTA desde RefSeq. La única información que se necesitaría cambiar es: 
+
+  1. TaxID
+  2. Nombre
+  3. Patrón de extracción del ID del gen
+
 ## Instrucciones de uso
 
 - Clonar el repositorio
