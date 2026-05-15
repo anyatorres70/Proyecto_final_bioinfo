@@ -69,7 +69,7 @@ enviar_telegram "ID/conteo/total/porcentajeo.txt creado correctamente"
 # en:
 # DEHA2A00110g,12,1409,2.0582
 
-sed -n '/^DEHA/{N;N;N;s/]\n#CTG_conteo=/,/;s/\n#Codones_totales=/,/;s/\n#Frecuencia_CTG=/,/;s/%//;p;}' "$datos_procesados/ID+conteo+total+porcentaje.txt" > "$datos_procesados/ID-codon-total-porcentaje.txt"
+sed -n '/^DEHA/{N;N;N;s/]\n#CTG_conteo=/,/;s/\n#Codones_totales=/,/;s/\n#Frecuencia_CTG=/,/;p;}' "$datos_procesados/ID+conteo+total+porcentaje.txt" > "$datos_procesados/ID-codon-total-porcentaje.txt"
 
 echo "Archivo ID-codon-total-porcentaje.txt creado"
 enviar_telegram "ID-codon-total-porcentaje.txt creado correctamente"
