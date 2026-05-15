@@ -192,7 +192,7 @@ bash scripts/principal.sh
   SSD, 256 GB
 
 - #### Tiempo de ejecución: 
-  tiempo aproximado 2 min (para el genoma de *D. hansenii*)
+  tiempo aproximado 1 min (para el genoma de *D. hansenii*)
 
 ## Autoría
 
