@@ -42,11 +42,11 @@ Se automatizará el análisis del codón CTG en el genoma de *D. hansenii* a par
 
 - Procesamiento de secuencias: 
   
-  Cada secuencia se acomoda en una sóla línea de texto y divide en tripletes (codones) respetando el marco de lectura.
+  Cada secuencia se acomoda en una sola línea de texto y se divide en tripletes (codones) respetando el marco de lectura.
 
 - Identificación y conteo de codones CTG: 
   
-  Se encuentran todos los codones CTG presentes en cada gen, se calcula el número total de codones por secuencia y se marcan sus posiciones dentro de la secuencia.
+  Se identifican todos los codones CTG presentes en cada gen, se calcula el número total de codones por secuencia y se marcan sus posiciones dentro de la secuencia con corchetes [CTG].
 
 - Cálculo de frecuencia relativa: 
   
