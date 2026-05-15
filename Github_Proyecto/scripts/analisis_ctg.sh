@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Anya Miranda 
-#script que se separen las secuencias en tripletes, se marquen los codones CTG y se cuenten
+#script que se separen las secuencias en tripletes, se marquen los codones CTG y se cuenten, además de tamaño de secuencia y porcentaje de codones en secuencia
 
 
 # cargar config de rutas

@@ -11,7 +11,7 @@ source telegram.sh
 # ===================
 # Archivo de entrada
 # ===================
-INPUT="$resultados/resultados_ctg.fna"
+INPUT="$datos_procesados/resultados_ctg.fna"
 
 #=========
 #inicio
@@ -50,10 +50,10 @@ send_telegram "encabezado+conteo.txt generado correctamente"
 # DEHA2A00110g
 # #CTG_conteo=12
 
-grep -oE '(DEHA.+g]|^#.+$)' "$datos_procesados/encabezado+conteo.txt" > "$datos_procesados/ID+conteo.txt"
+grep -oE '(DEHA[^]]+g\]|^#CTG_conteo=.*$|^#Codones_totales=.*$|^#Frecuencia_CTG=.*$)' "$datos_procesados/encabezado+conteo.txt" > "$datos_procesados/ID+conteo+total+porcentaje.txt"
 
-echo "Archivo ID+conteo.txt creado"
-send_telegram "ID+conteo.txt generado correctamente"
+echo "Archivo ID+conteo+total+porcentaje.txt creado"
+send_telegram "ID+conteo+total+porcentajeo.txt generado correctamente"
 
 # =======================================
 # Unir nombre gen + conteo en una línea
@@ -65,16 +65,16 @@ send_telegram "ID+conteo.txt generado correctamente"
 # en:
 # DEHA2A00110g,12
 
-sed 'N;s/]\n#CTG_conteo=/,/' "$datos_procesados/ID+conteo.txt" > "$datos_procesados/ID-codon.txt"
+sed -n '/^DEHA/{N;N;N;s/]\n#CTG_conteo=/,/;s/\n#Codones_totales=/,/;s/\n#Frecuencia_CTG=/,/;s/%//;p;}' "$datos_procesados/ID+conteo+total+porcentaje.txt" > "$datos_procesados/ID-codon-total-porcentaje.txt"
 
-echo "Archivo ID-codon.txt creado"
-send_telegram "ID-codon.txt generado correctamente"
+echo "Archivo ID-codon-total-porcentaje.txt creado"
+send_telegram "ID-codon-total-porcentaje.txt generado correctamente"
 
 # ==========================
 # Ordenar de mayor a menor
 # ==========================
 
-sort -t',' -k2,2nr "$datos_procesados/ID-codon.txt" > "$resultados/salida_ordenada.txt"
+sort -t',' -k2,2nr "$datos_procesados/ID-codon-total-porcentaje.txt" > "$resultados/salida_ordenada.txt"
 
 echo "Archivo salida_ordenada.txt creado"
 send_telegram "salida_ordenada.txt generado correctamente"
