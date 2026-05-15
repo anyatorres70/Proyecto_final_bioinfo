@@ -30,7 +30,7 @@ Finalmente se generará una salida que muestre, para cada gen, su identificador 
 
 ## Descripción del flujo de trabajo
 
-Se automatizará el análisis del codón CTG en el genoma de *D. hansenii* a partir de datos RefSeq. El flujo de trabajo sigue los siguientes pasos principales:
+Se automatiza el análisis del codón CTG en el genoma de *D. hansenii* a partir de datos RefSeq. El flujo de trabajo sigue los siguientes pasos principales:
 
 - Descarga de secuencias CDS: 
   
@@ -54,17 +54,17 @@ Se automatizará el análisis del codón CTG en el genoma de *D. hansenii* a par
 
 - Organización y ordenamiento de resultados: 
   
-    Se obtendrá una salida con cuatro columnas: 
+    Se obtiene una salida con cuatro columnas: 
     - ID, Número de codones CTG, tamaño secuencia, Frecuencia relativa de CTG (%)
   
-    Después se ordenarán de acuerdo con la cantidad de codones CTG (de mayor a menor).
+    Después se ordenan de acuerdo con la cantidad de codones CTG (de mayor a menor).
 
 - Generación de salidas: 
   
-    Se generarán archivos de salida con la información procesada para su análisis posterior, incluyendo una lista completa de genes procesados y un archivo con el top 50 de genes con mayor número de codones CTG. 
+    Se generan archivos de salida con la información procesada para su análisis posterior, incluyendo una lista completa de genes procesados y un archivo con el top 50 de genes con mayor número de codones CTG. 
 
 ## Estructura del repositorio
-
+```
 Proyecto_final_bioinfo/
 │
 Github_Proyecto/
@@ -83,7 +83,7 @@ Github_Proyecto/
     ├── analisis_ctg.sh    # Procesamiento de secuencias, separación en codones y análisis de CTG
     ├── config.sh          # Configuración de rutas y directorios del proyecto
     ├── orden_secuencia.sh # Organización y ordenamiento de genes según frecuencia de CTG
-
+```
 
 Importante: Para poder usar `telegram.sh` es necesario configurar un archivo `.env` con el token del bot y el chat ID
 
