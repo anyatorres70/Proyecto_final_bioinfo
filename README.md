@@ -109,9 +109,9 @@ La estructura del proyecto permite reproducir el análisis completo ejecutando s
 
 Puede ser adaptado a otros organismos, siempre que se descarguen archivos CDS en formato FASTA desde RefSeq. La única información que se necesitaría cambiar es: 
 
-  1. TaxID
-  2. Nombre
-  3. Patrón de extracción del ID del gen
+  1. TaxID (refseq.sh)
+  2. Nombre (refseq.sh)
+  3. Patrón de extracción del ID del gen (orden_secuencia.sh)
 
 ## Instrucciones de uso
 
