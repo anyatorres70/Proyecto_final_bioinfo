@@ -138,7 +138,7 @@ bash Github_Proyecto/scripts/principal.sh
 
   - resultados_ctg.fna:
   
-      Archivo FASTA con las secuencias separadas por gen y divididas en tripletes, marcando el codón como [CTG]. Conteo del número de codones CTG por gen, cálculo del tamaño total por secuencia y cálculo del porcentaje de frecuencia del codón CTG con respecto al tamaño total.
+      Archivo FASTA con las secuencias separadas por gen y divididas en tripletes, marcando el codón como `[CTG]`. Conteo del número de codones CTG por gen, cálculo del tamaño total por secuencia y cálculo del porcentaje de frecuencia del codón CTG con respecto al tamaño total.
 
   - encabezado+conteo.txt:
   
