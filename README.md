@@ -122,7 +122,7 @@ git clone https://github.com/anyatorres70/Proyecto_final_bioinfo.git
 cd Proyecto_final_bioinfo
 
 - Ejecutar el pipeline
-bash scripts/principal.sh
+bash Github_Proyecto/scripts/principal.sh
 
 ## Entradas y salidas
 
