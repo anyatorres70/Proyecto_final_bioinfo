@@ -99,7 +99,6 @@ Importante: Para poder usar `telegram.sh` es necesario configurar un archivo `.e
 - find
 - unzip
 - datasets NCBI 18.24.0
-- Homebrew 5.1.8
 
 ## Reproducibilidad 
 
