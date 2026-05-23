@@ -76,11 +76,26 @@ enviar_telegram "ID/conteo/total/porcentajeo.txt creado correctamente"
 echo "Archivo ID-codon-total-porcentaje.txt creado"
 enviar_telegram "ID-codon-total-porcentaje.txt creado correctamente"
 
+# =======================================
+# Agregar columna de intrones
+# =======================================
+
+if [ ! -s "$resultados/intrones_genes.tsv" ]; then
+    echo "ERROR: No se encontró intrones_genes.tsv"
+    enviar_telegram "Error: no se encontró intrones_genes.tsv"
+    exit 1
+fi
+
+awk -F'\t' 'BEGIN{OFS="\t"} NR==FNR{if(FNR>1) intrones[$1]=$2; next} FNR==1{print $0,"Intrones"; next} {if($1 in intrones) print $0,intrones[$1]; else print $0,0}' "$resultados/intrones_genes.tsv" "$datos_procesados/ID-codon-total-porcentaje.tsv" > "$datos_procesados/ID-codon-total-porcentaje-intrones.tsv"
+
+echo "Archivo ID-codon-total-porcentaje-intrones.tsv creado"
+enviar_telegram "Archivo con intrones agregado correctamente"
+
 # ==========================
 # Ordenar de mayor a menor
 # ==========================
 
-{ head -n 1 "$datos_procesados/ID-codon-total-porcentaje.tsv"; tail -n +2 "$datos_procesados/ID-codon-total-porcentaje.tsv" | sort -t$'\t' -k2,2nr; } > "$resultados/salida_ordenada.tsv"
+{ head -n 1 "$datos_procesados/ID-codon-total-porcentaje-intrones.tsv"; tail -n +2 "$datos_procesados/ID-codon-total-porcentaje-intrones.tsv" | sort -t$'\t' -k2,2nr; } > "$resultados/salida_ordenada.tsv"
 
 echo "Archivo salida_ordenada.txt creado"
 enviar_telegram "salida_ordenada.txt creado correctamente"
@@ -94,12 +109,10 @@ echo "Archivo top50_ctg.txt creado en resultados"
 enviar_telegram "Top 50 creado en resultados"
 
 # ==================================
-# Crear tabla alineada con column
+# Crear tabla alineada
 # ==================================
 
-awk -F'\t' '{
-    printf "%-14s %-10s %-8s %-10s\n", $1, $2, $3, $4
-}' "$resultados/top50_ctg.tsv" > "$resultados/top50_ctg_tabla.txt"
+awk -F'\t' '{printf "%-14s %-10s %-8s %-12s %-8s\n", $1, $2, $3, $4, $5}' "$resultados/top50_ctg.tsv" > "$resultados/top50_ctg_tabla.txt"
 
 echo "Archivo top50_ctg_tabla.txt creado"
 enviar_telegram "Tabla alineada creada correctamente"

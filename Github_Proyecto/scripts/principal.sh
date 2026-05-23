@@ -42,6 +42,17 @@ if [ $? -ne 0 ]; then
 
 fi
 
+# ==================
+# Analisis intrones
+# ==================
+bash "$SCRIPT_DIR/intrones.sh"
+
+if [ $? -ne 0 ]; then
+    echo "Error en el análisis de intrones"
+    enviar_telegram "Error en el análisis de intrones"
+    exit 1
+fi
+
 # =====================
 # Ordenar resultados
 # =====================

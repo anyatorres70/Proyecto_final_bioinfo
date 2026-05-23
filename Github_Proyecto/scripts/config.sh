@@ -23,3 +23,8 @@ resultados="$proyecto_DIR/resultados"
 mkdir -p "$datos_procesados"
 mkdir -p "$datos_descargados"
 mkdir -p "$resultados"
+
+# ==========================
+# Configuración del organismo
+# ==========================
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/organismo.sh"
