@@ -7470,6 +7470,9 @@ DEHA2C12210g]
 #CTG_conteo=1
 #Codones_totales=578
 #Frecuencia_CTG=0.1730%
+#CTG_conteo=9
+#Codones_totales=1676
+#Frecuencia_CTG=0.5370%
 DEHA2C12254g]
 #CTG_conteo=2
 #Codones_totales=782
@@ -7702,6 +7705,9 @@ DEHA2C13508g]
 #CTG_conteo=2
 #Codones_totales=376
 #Frecuencia_CTG=0.5319%
+#CTG_conteo=9
+#Codones_totales=1676
+#Frecuencia_CTG=0.5370%
 DEHA2C13552g]
 #CTG_conteo=0
 #Codones_totales=234

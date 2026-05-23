@@ -6,7 +6,7 @@
     {
       "filePath": "assembly_data_report.jsonl",
       "fileType": "DATA_REPORT",
-      "uncompressedLengthBytes": "4497"
+      "uncompressedLengthBytes": "4682"
     }
   ]
 },{
@@ -15,7 +15,12 @@
     {
       "filePath": "GCF_000006445.2/cds_from_genomic.fna",
       "fileType": "CDS_NUCLEOTIDE_FASTA",
-      "uncompressedLengthBytes": "10767041"
+      "uncompressedLengthBytes": "10869991"
+    },
+    {
+      "filePath": "GCF_000006445.2/genomic.gff",
+      "fileType": "GFF3",
+      "uncompressedLengthBytes": "8257117"
     }
   ]
 }]}
