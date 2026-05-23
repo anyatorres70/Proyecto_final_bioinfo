@@ -61,9 +61,12 @@ function procesar(seq, i, codon, count, total, porcentaje, out) {
 
         #si codon completo
         if (length(codon)==3) {
+        # Ignorar codones STOP
+        if (codon=="TAA" || codon=="TAG" || codon=="TGA")
+             continue
 
-            total++
-
+        total++
+        
             if (codon=="CTG") {
                 out=out "[CTG] "
                 count++

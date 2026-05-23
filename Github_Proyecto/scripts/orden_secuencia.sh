@@ -52,13 +52,15 @@ enviar_telegram "encabezado/conteo.txt creado correctamente"
 # #Codones_totales=1409
 # #Frecuencia_CTG=2.0582%
 
-grep -oE '(DEHA[^]]+g\]|^#CTG_conteo=.*$|^#Codones_totales=.*$|^#Frecuencia_CTG=.*$)' "$datos_procesados/encabezado+conteo.txt" > "$datos_procesados/ID+conteo+total+porcentaje.txt"
+grep -oE '(DEHA[^]]+g\]|^#CTG_conteo=.*$|^#Codones_totales=.*$|^#Frecuencia_CTG=.*$)' \
+"$datos_procesados/encabezado+conteo.txt" \
+> "$datos_procesados/ID+conteo+total+porcentaje.txt"
 
 echo "Archivo ID/conteo/total/porcentaje.txt creado"
 enviar_telegram "ID/conteo/total/porcentajeo.txt creado correctamente"
 
 # =======================================
-# Unir nombre gen + conteo en una línea
+# Unir nombre gen + conteo en una línea + archivo tsv
 # =======================================
 # Convierte:
 #
@@ -69,7 +71,7 @@ enviar_telegram "ID/conteo/total/porcentajeo.txt creado correctamente"
 # en:
 # DEHA2A00110g,12,1409,2.0582
 
-sed -n '/^DEHA/{N;N;N;s/]\n#CTG_conteo=/,/;s/\n#Codones_totales=/,/;s/\n#Frecuencia_CTG=/,/;p;}' "$datos_procesados/ID+conteo+total+porcentaje.txt" > "$datos_procesados/ID-codon-total-porcentaje.txt"
+{ echo -e "ID\tCodón_CTG\tTamaño\tFrecuencia%"; sed -n '/^DEHA/{N;N;N;s/]\n#CTG_conteo=/\t/;s/\n#Codones_totales=/\t/;s/\n#Frecuencia_CTG=/\t/;p;}' "$datos_procesados/ID+conteo+total+porcentaje.txt"; } > "$datos_procesados/ID-codon-total-porcentaje.tsv"
 
 echo "Archivo ID-codon-total-porcentaje.txt creado"
 enviar_telegram "ID-codon-total-porcentaje.txt creado correctamente"
@@ -78,7 +80,7 @@ enviar_telegram "ID-codon-total-porcentaje.txt creado correctamente"
 # Ordenar de mayor a menor
 # ==========================
 
-sort -t',' -k2,2nr "$datos_procesados/ID-codon-total-porcentaje.txt" > "$resultados/salida_ordenada.txt"
+{ head -n 1 "$datos_procesados/ID-codon-total-porcentaje.tsv"; tail -n +2 "$datos_procesados/ID-codon-total-porcentaje.tsv" | sort -t$'\t' -k2,2nr; } > "$resultados/salida_ordenada.tsv"
 
 echo "Archivo salida_ordenada.txt creado"
 enviar_telegram "salida_ordenada.txt creado correctamente"
@@ -86,7 +88,18 @@ enviar_telegram "salida_ordenada.txt creado correctamente"
 # ========================= 
 # Mostrar una lista de 50 
 # =========================
-head -n 50 "$resultados/salida_ordenada.txt" > "$resultados/top50_ctg.txt"
+{ head -n 1 "$resultados/salida_ordenada.tsv"; tail -n +2 "$resultados/salida_ordenada.tsv" | head -n 50; } > "$resultados/top50_ctg.tsv"
 
 echo "Archivo top50_ctg.txt creado en resultados"
 enviar_telegram "Top 50 creado en resultados"
+
+# ==================================
+# Crear tabla alineada con column
+# ==================================
+
+awk -F'\t' '{
+    printf "%-14s %-10s %-8s %-10s\n", $1, $2, $3, $4
+}' "$resultados/top50_ctg.tsv" > "$resultados/top50_ctg_tabla.txt"
+
+echo "Archivo top50_ctg_tabla.txt creado"
+enviar_telegram "Tabla alineada creada correctamente"
