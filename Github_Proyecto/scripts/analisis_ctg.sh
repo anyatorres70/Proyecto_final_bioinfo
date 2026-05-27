@@ -26,7 +26,7 @@ enviar_telegram "Archivo encontrado: $(basename "$INPUT")"
 # ===============
 # Definir output
 # ===============
-OUTPUT="$datos_procesados/resultados_ctg.fna"
+OUTPUT="$datos_procesados/resultados_${CODON_NOMBRE}.fna"
 
 # ===================
 # Inicio de análisis
@@ -37,7 +37,7 @@ enviar_telegram "Iniciando análisis CTG..."
 # Procesamiento (tripletes + CTG)
 # ================================
 
-awk '
+awk -v codon_obj="$CODON" '
 #para encontrar un encabezado FASTA/si ya había una secuencia analizar antes de pasar a la sig/print imprime encabezado/seq= reinicia secuencia para nuevo gen/next pasa a sig linea
 /^>/ { if (seq) procesar(seq); print; seq=""; next }
 
@@ -66,12 +66,12 @@ function procesar(seq, i, codon, count, total, porcentaje, out) {
              continue
 
         total++
-        
-            if (codon=="CTG") {
-                out=out "[CTG] "
+
+             if (codon == codon_obj) {
+                out = out "[" codon_obj "] "
                 count++
             } else {
-                out=out codon " "
+                out = out codon " "
             }
         }
     }
@@ -82,11 +82,11 @@ function procesar(seq, i, codon, count, total, porcentaje, out) {
         porcentaje = 0
     }
 
-#imprimir seq procesada
+# Imprimir resultados
     print out
-    print "#CTG_conteo=" count
+    print "#" codon_obj "_conteo=" count
     print "#Codones_totales=" total
-    printf "#Frecuencia_CTG=%.4f%%\n", porcentaje
+    printf "#Frecuencia_%s=%.4f%%\n", codon_obj, porcentaje
 }
 ' "$INPUT" > "$OUTPUT"
 

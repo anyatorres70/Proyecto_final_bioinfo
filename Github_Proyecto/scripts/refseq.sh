@@ -18,12 +18,6 @@ source "$(dirname "${BASH_SOURCE[0]}")/config.sh"
 source telegram.sh
 
 
-#variables
-TAXID=284592
-NOMBRE="Debaryomyces_hansenii"
-ARCHIVO="$datos_descargados/${NOMBRE}.zip"
-CARPETA="$datos_descargados/${NOMBRE}"
-
 #=========
 #inicio
 #==========
@@ -43,10 +37,10 @@ fi
 # =============
 # Descarga
 # =============
-datasets download genome taxon $TAXID \
+datasets download genome taxon "$TAXID" \
     --assembly-source refseq \
     --include cds,gff3 \
-    --filename ${ARCHIVO}
+    --filename "$ARCHIVO"
 
 #===================================
 # Verificar que ya está descargado

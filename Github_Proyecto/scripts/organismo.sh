@@ -14,6 +14,15 @@ NOMBRE="Debaryomyces_hansenii"
 GEN_PATRON='DEHA[^]]+g'
 
 # ==========================
+# Codón de interés
+# ==========================
+
+CODON="CTG"
+
+# Nombre corto para archivos/salidas
+CODON_NOMBRE="CTG"
+
+# ==========================
 # Archivos
 # ==========================
 
