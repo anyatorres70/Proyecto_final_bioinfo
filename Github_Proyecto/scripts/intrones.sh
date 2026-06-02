@@ -34,7 +34,7 @@ fi
 # Definir salida
 # ==========================
 
-OUTPUT="$resultados/intrones_genes.tsv"
+OUTPUT="$datos_procesados/intrones_genes.tsv"
 
 # ==========================
 # Detectar intrones

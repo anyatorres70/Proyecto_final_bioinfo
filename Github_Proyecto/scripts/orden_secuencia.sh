@@ -80,13 +80,13 @@ enviar_telegram "ID-codon-total-porcentaje.txt creado correctamente"
 # Agregar columna de intrones
 # =======================================
 
-if [ ! -s "$resultados/intrones_genes.tsv" ]; then
+if [ ! -s "$datos_procesados/intrones_genes.tsv" ]; then
     echo "ERROR: No se encontró intrones_genes.tsv"
     enviar_telegram "Error: no se encontró intrones_genes.tsv"
     exit 1
 fi
 
-awk -F'\t' 'BEGIN{OFS="\t"} NR==FNR{if(FNR>1) intrones[$1]=$2; next} FNR==1{print $0,"Intrones"; next} {if($1 in intrones) print $0,intrones[$1]; else print $0,0}' "$resultados/intrones_genes.tsv" "$datos_procesados/ID-codon-total-porcentaje.tsv" > "$datos_procesados/ID-codon-total-porcentaje-intrones.tsv"
+awk -F'\t' 'BEGIN{OFS="\t"} NR==FNR{if(FNR>1) intrones[$1]=$2; next} FNR==1{print $0,"Intrones"; next} {if($1 in intrones) print $0,intrones[$1]; else print $0,0}' "$datos_procesados/intrones_genes.tsv" "$datos_procesados/ID-codon-total-porcentaje.tsv" > "$datos_procesados/ID-codon-total-porcentaje-intrones.tsv"
 
 echo "Archivo ID-codon-total-porcentaje-intrones.tsv creado"
 enviar_telegram "Archivo con intrones agregado correctamente"
