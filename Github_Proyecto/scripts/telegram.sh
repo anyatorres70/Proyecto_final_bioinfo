@@ -13,5 +13,5 @@ curl -s -X POST "https://api.telegram.org/bot${TOKEN}/sendMessage" \
   -d "chat_id=${CHAT_ID}" \
   -d "text=$mensaje" > /dev/null
 }
-  #parametros emiezan con $ seguido del número de parametro que buscamos
+  #parametros empiezan con $ seguido del número de parametro que buscamos
   
